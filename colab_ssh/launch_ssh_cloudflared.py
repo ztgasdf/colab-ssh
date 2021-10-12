@@ -62,7 +62,7 @@ def launch_ssh_cloudflared(
     open('cloudflared.log', 'w').close()
 
     # Prepare the cloudflared command
-    popen_command = f'./cloudflared tunnel --url ssh://localhost:22 --logfile ./cloudflared.log --metrics localhost:45678 {" ".join(extra_params)}'
+    popen_command = f'tmux new-session -d -s \'cf\' \'./cloudflared tunnel --url ssh://localhost:22 --logfile ./cloudflared.log --metrics localhost:45678 {" ".join(extra_params)}\''
     preexec_fn = None
     if prevent_interrupt:
         popen_command = 'nohup ' + popen_command
